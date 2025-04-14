@@ -20,7 +20,7 @@ public class Main {
 
         int ronde = 1;
 
-        // Perulangan akan terus berjalan selama salah satu pahlawan  masih hidup
+        // Perulangan akan terus berjalan selama masih ada pahlawan yang hidup
         while ((feixiao.isAlive() || robin.isAlive()) && hoolay.isAlive()) {
             System.out.println("==== RONDE " + ronde + " ====");
 

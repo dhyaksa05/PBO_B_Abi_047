@@ -1,24 +1,22 @@
-
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // Inisialisasi Scanner
         Scanner scanner = new Scanner(System.in);
-        // Variabel kontrol loop
         boolean lanjut = true;
 
+        // Membuat objek Admin dan Mahasiswa
+        Admin admin = new Admin("Admin123", "Password123"); // Ganti 123 dengan 3 digit NIM terakhir Anda
+        Mahasiswa mahasiswa = new Mahasiswa("", "");
+
         while (lanjut) {
-            // Menampilkan pilihan login
             System.out.println("Pilih login:");
             System.out.println("1. Admin");
             System.out.println("2. Mahasiswa");
             System.out.print("Masukkan pilihan: ");
 
-            // Membaca pilihan pengguna
             String pilihan = scanner.nextLine();
 
-            // Menggunakan percabangan if-else untuk memproses pilihan
             if (pilihan.equals("1")) {
                 // Login sebagai Admin
                 System.out.print("Masukkan username: ");
@@ -26,23 +24,8 @@ public class Main {
                 System.out.print("Masukkan password: ");
                 String password = scanner.nextLine();
 
-                // Validasi username dan password Admin
-                // Username valid: "Admin" + (3-digit NIM terakhir kalian)
-                // Password valid: "Password" + (3-digit NIM terakhir kalian)
-                if (username.startsWith("Admin") && password.startsWith("Password")) {
-                    // Memeriksa jika 3 karakter terakhir username dan password sama
-                    if (username.length() >= 5 && password.length() >= 8) {
-                        String usernameDigits = username.substring(5);
-                        String passwordDigits = password.substring(8);
-
-                        if (usernameDigits.equals(passwordDigits) && usernameDigits.length() == 3) {
-                            System.out.println("Login Admin berhasil!");
-                        } else {
-                            System.out.println("Login gagal! Username atau password salah.");
-                        }
-                    } else {
-                        System.out.println("Login gagal! Username atau password salah.");
-                    }
+                if (admin.login(username, password)) {
+                    System.out.println("Login Admin berhasil!");
                 } else {
                     System.out.println("Login gagal! Username atau password salah.");
                 }
@@ -53,30 +36,23 @@ public class Main {
                 System.out.print("Masukkan NIM: ");
                 String nim = scanner.nextLine();
 
-                // Validasi nama dan NIM Mahasiswa
-                // NIM harus terdiri dari minimal 10 angka
-                if (!nama.trim().isEmpty() && nim.matches("\\d{10,}")) {
-                    // Login berhasil jika nama tidak kosong dan NIM berupa minimal 10 angka
+                if (mahasiswa.login(nama, nim)) {
+                    mahasiswa = new Mahasiswa(nama, nim);
                     System.out.println("Login Mahasiswa berhasil!");
-                    System.out.println("Nama: " + nama);
-                    System.out.println("NIM: " + nim);
+                    mahasiswa.displayInfo();
                 } else {
                     System.out.println("Login gagal! Nama atau NIM salah.");
                 }
             } else {
-                // Pilihan tidak valid
                 System.out.println("Pilihan tidak valid.");
             }
 
-            System.out.println("Process finished with exit code 0");
-
-            // Tanyakan apakah ingin melanjutkan
             System.out.print("\nIngin mencoba lagi? (y/n): ");
             String jawaban = scanner.nextLine();
             lanjut = jawaban.equalsIgnoreCase("y");
             System.out.println();
         }
 
-        //scanner.close();
+        scanner.close();
     }
 }

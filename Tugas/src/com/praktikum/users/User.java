@@ -1,4 +1,8 @@
-class User {
+// Package com.praktikum.users
+package com.praktikum.users;
+
+// Abstract class User
+public abstract class User {
     // Encapsulation - private attributes
     private String nama;
     private String nim;
@@ -9,7 +13,21 @@ class User {
         this.nim = nim;
     }
 
-    // Getter methods
+    // Getter for nama
+    public String getNama() {
+        return nama;
+    }
+
+    // Setter for nama
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    // Getter for nim
+    public String getNim() {
+        return nim;
+    }
+
     public void setNim(String nim) {
         this.nim = nim;
     }
@@ -23,11 +41,11 @@ class User {
         }
     }
 
-    // Method that will be overridden by subclasses
-    public boolean login(String inputData1, String inputData2) {
-        // Base implementation
-        return false;
-    }
+    // Abstract methods
+    public abstract boolean login(String inputData1, String inputData2);
+
+    // Abstract method untuk menampilkan menu spesifik peran
+    public abstract void displayAppMenu();
 
     // Method to display user information
     public void displayInfo() {

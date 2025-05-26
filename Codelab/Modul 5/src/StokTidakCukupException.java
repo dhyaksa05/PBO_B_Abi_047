@@ -1,4 +1,5 @@
-package PACKAGE_NAME;
-
-public class StokTidakCukupException {
+public class StokTidakCukupException extends Exception {
+    public StokTidakCukupException(String message) {
+        super(message);
+    }
 }
